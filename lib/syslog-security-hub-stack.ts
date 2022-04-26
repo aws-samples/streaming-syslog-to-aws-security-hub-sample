@@ -43,10 +43,13 @@ export class SyslogSecurityHubStack extends Stack {
 			}]
     });
 
-    //  Restrict ingress to TCP/5140. Must use SSM Session Manager rather than ssh for interactive shell. https://aws.amazon.com/blogs/mt/vr-beneficios-session-manager/
+    //  Restrict ingress to TCP/5140 from the VPC CIDR Block. Note: Must use SSM Session Manager rather than ssh for interactive shell. https://aws.amazon.com/blogs/mt/vr-beneficios-session-manager/
     const securityGroup = new ec2.SecurityGroup(this, 'syslog-security-hub-security-group', { vpc, allowAllOutbound: true });
-    securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(5140));
-    
+
+    //  SECURITY TIP: Additional CIDR Blocks may be added as Ingress Rules if access outside the VPC is desired
+    //  via the VPC's associated Internet Gateway and the Elastic IP Address (EIP) attached to the EC2 instance.
+    securityGroup.addIngressRule(ec2.Peer.ipv4(vpc.vpcCidrBlock), ec2.Port.tcp(5140));
+
     //  Create EC2 instance for Fluentd, as well as any interactions (e.g. sending sample syslog event to system)
     const instance = new ec2.Instance(this, 'syslog-security-hub-ec2-instance', 
       {

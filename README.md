@@ -2,7 +2,9 @@
 
 ## Overview
 
-This project has an [associated blog](https://aws.amazon.com/blogs/) which provides greater detail regarding this solution.
+This project has a forthcoming [blog](https://aws.amazon.com/blogs/) which will provide greater detail regarding this solution.
+
+This sample is provided for demonstration purposes only, to serve as a starting point to help you customize for your source system. A basic understanding of [Syslog](https://en.wikipedia.org/wiki/Syslog) and how the source system emitting Syslog events maps its fields to Syslog Common Event Format (CEF) is necessary for customization of the provided project.
 
 ## Solution Overview
 
