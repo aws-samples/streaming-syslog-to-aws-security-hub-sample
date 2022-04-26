@@ -2,9 +2,13 @@
 
 ## Overview
 
-This project has a forthcoming [blog](https://aws.amazon.com/blogs/) which will provide greater detail regarding this solution.
+Most AWS customers have operating systems, firewalls, Intrusion Detection Systems (IDS), Intrusion Prevention Systems (IPS), etc. capable of emitting events via Syslog for observability. The purpose of this project is to provide a sample [AWS Cloud Development Kit (CDK)](https://aws.amazon.com/cdk/) project to create all the necessary resources for you to receive streaming Syslog events, parse and transform these events to [AWS Security Finding Format (ASFF)](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html), and lastly continuously ingest these events as findings in [AWS Security Hub](https://aws.amazon.com/security-hub/).
+
+This project includes a sample Syslog event from a [Dragos SiteStore](https://www.dragos.com/) system for testing purposes, and a custom Lambda function for parsing and transforming Dragos events. [Dragos](https://www.dragos.com/) is a member of the [AWS Partner Network](https://partners.amazonaws.com/partners/0010h00001jBdt3AAC/Dragos), and provides Industrial Strength Cybersecurity for industrial infrastructure. 
 
 This sample is provided for demonstration purposes only, to serve as a starting point to help you customize for your source system. A basic understanding of [Syslog](https://en.wikipedia.org/wiki/Syslog) and how the source system emitting Syslog events maps its fields to Syslog Common Event Format (CEF) is necessary for customization of the provided project.
+
+*This project has a forthcoming [blog](https://aws.amazon.com/blogs/) which will provide greater detail regarding this solution.*
 
 ## Solution Overview
 
@@ -16,7 +20,7 @@ This sample is provided for demonstration purposes only, to serve as a starting 
 
 ### Pre-Requisites
 
-In order to get started, you will need an AWS account, preferably free from any production workloads. Also, either an IAM role to deploy with from Cloud9 or an IAM user with admin permissions as the stacks we will be deploying require significant access.
+In order to get started, you will need an AWS account, preferably free from any production workloads. Also, either an IAM role to deploy with from Cloud9 or an IAM user with admin permissions as the stacks we will be deploying require sufficient privileges.
 Once we have that in place, it’s time to get ready to deploy.
 
 ### Cloud9
@@ -26,7 +30,9 @@ Create a Cloud9 environment from the AWS console. Provide the required Name, and
 
 ### Build and Deploy
 
-From a terminal window, you will need to clone the GitHub repo, install packages, build, and deploy the CloudFormation templates. Issue the following commands in a terminal window in Cloud9. By default, the AWS CDK will prompt you to deploy changes. If you want to skip confirmations, add the following command line option to the AWS CDK commands below.  <code>--require-approval never</code>.
+From a terminal window, you will need to clone the GitHub repo, install packages, build, and deploy the CloudFormation templates. Issue the following commands in a terminal window in Cloud9. By default, the AWS CDK will prompt you to deploy changes. If you want to skip confirmations, add the following command line option to the AWS CDK commands below.
+ 
+ <code> --require-approval never</code>
 
 #### Clone GitHub repo
 <pre><code>
@@ -39,19 +45,19 @@ cd streaming-syslog-to-aws-security-hub-sample
 cdk bootstrap
 </code></pre>
 
-#### Install packages
+#### Install CDK Project required packages
 <pre><code>
 npm install
 </code></pre>
 
-#### Install Lambda Function packages
+#### Install Lambda function required packages
 <pre><code>
 cd src/lambda-syslog
 npm install
 cd ../..
 </code></pre>
 
-#### Build
+#### Build CDK Project
 <pre><code>
 npm run build
 </code></pre>
