@@ -1,0 +1,6 @@
+{
+	"name": "lambda-syslog",
+	"dependencies": {
+		"nsyslog-parser": "^0.9.6"
+	}
+}

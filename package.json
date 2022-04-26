@@ -1,0 +1,31 @@
+{
+  "name": "syslog-security-hub-cdk",
+  "version": "0.1.0",
+  "bin": {
+    "syslog-security-hub-cdk": "bin/syslog-security-hub-cdk.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "aws-cdk": "2.21.1",
+    "@aws-cdk/assert": "2.21.1",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.21.1",
+    "@aws-solutions-constructs/aws-apigateway-kinesisstreams": "2.5.0",
+    "@aws-solutions-constructs/aws-kinesisstreams-kinesisfirehose-s3": "2.5.0",
+    "@aws-solutions-constructs/aws-kinesisstreams-lambda": "2.5.0",
+    "constructs": "^10.0.0",
+    "source-map-support": "^0.5.16"
+  }
+}
