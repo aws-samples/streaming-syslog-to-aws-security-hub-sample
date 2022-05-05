@@ -115,7 +115,7 @@ export class SyslogSecurityHubStack extends Stack {
       'echo "  " >> /etc/td-agent/td-agent.conf',
       'echo "</match>" >> /etc/td-agent/td-agent.conf',
       'systemctl restart td-agent',
-      'sleep 10',
+      'running=0; x=0; while [ $running -eq 0 -a $x -le 1000 ]; do running=$(systemctl status td-agent | grep -i "active (running)" | wc -l) x=$(( $x + 1 )); done; echo $x;',
       'cat sample-syslog.txt | nc 127.0.0.1 5140'
     );
     
