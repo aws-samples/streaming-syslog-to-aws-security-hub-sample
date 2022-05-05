@@ -73,10 +73,14 @@ export class SyslogSecurityHubStack extends Stack {
     instance.userData.addCommands(
       'yum update -y',
       'yum install nc -y',
-      'wget http://packages.treasuredata.com.s3.amazonaws.com/4/amazon/2/x86_64/td-agent-4.2.0-1.amzn2.x86_64.rpm',
+      'wget https://streaming-syslog-to-aws-security-hub-sample.s3.amazonaws.com/td-agent-4.2.0-1.amzn2.x86_64.rpm',
+      'wget https://streaming-syslog-to-aws-security-hub-sample.s3.amazonaws.com/sample-syslog.txt',
+      'read YYYY MM DD <<<$(date +"%Y %m %d")',
+      'sed -i "s/2022-04-04/$YYYY-$MM-$DD/g" sample-syslog.txt',
+      'sed -i "s/id=12345678/id=$(date +%s)/g" sample-syslog.txt',
       'chmod +x td-agent-4.2.0-1.amzn2.x86_64.rpm',
       'rpm --install td-agent-4.2.0-1.amzn2.x86_64.rpm',
-      '/usr/sbin/td-agent-gem install fluent-plugin-kinesis',
+      '/usr/sbin/td-agent-gem install fluent-plugin-kinesis -v 3.4.2',
       'cp /etc/td-agent/td-agent.conf /etc/td-agent/td-agent.conf.backup',
       'echo "<source>" > /etc/td-agent/td-agent.conf',
       'echo "    @type syslog" >> /etc/td-agent/td-agent.conf',
@@ -110,7 +114,8 @@ export class SyslogSecurityHubStack extends Stack {
       'echo "  </buffer>" >> /etc/td-agent/td-agent.conf',
       'echo "  " >> /etc/td-agent/td-agent.conf',
       'echo "</match>" >> /etc/td-agent/td-agent.conf',
-      'systemctl restart td-agent'
+      'systemctl restart td-agent',
+      'cat sample-syslog.txt | nc 127.0.0.1 5140'
     );
     
     //  Associate EIP to newly created EC2 instance.
