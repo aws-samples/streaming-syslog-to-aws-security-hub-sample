@@ -67,6 +67,10 @@ npm run build
 cdk deploy
 </code></pre>
 
+## Verification
+
+Once the CDK deployment process has completed, you can [open AWS Security Hub Console Findings page](https://console.aws.amazon.com/securityhub/home/findings/findings/findings?search=Title%3D%255Coperator%255C%253APREFIX%255C%253ADRAGOS#/findings?search=Title%3D%255Coperator%255C%253APREFIX%255C%253ADRAGOS) to search for Findings with a Title that starts with <code>DRAGOS</code>. If successful, you should find a Finding with the Title <code>DRAGOS: Test Message from Dragos App</code>.
+
 ## License Summary
 
 This library is licensed under the MIT-0 License. See the [LICENSE](./LICENSE) file.
