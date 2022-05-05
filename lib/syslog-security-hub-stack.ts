@@ -115,6 +115,7 @@ export class SyslogSecurityHubStack extends Stack {
       'echo "  " >> /etc/td-agent/td-agent.conf',
       'echo "</match>" >> /etc/td-agent/td-agent.conf',
       'systemctl restart td-agent',
+      'sleep 10',
       'cat sample-syslog.txt | nc 127.0.0.1 5140'
     );
     
