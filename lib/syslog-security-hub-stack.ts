@@ -103,7 +103,7 @@ export class SyslogSecurityHubStack extends Stack {
       'echo "stream_name ' + kinesisStreamsToLambda.kinesisStream.streamName + '" >> /etc/td-agent/td-agent.conf',
       'echo "" >> /etc/td-agent/td-agent.conf',
       'echo "# AWS region" >> /etc/td-agent/td-agent.conf',
-      'echo "region us-east-1" >> /etc/td-agent/td-agent.conf',
+      'echo "region ' + Stack.of(this).region + '" >> /etc/td-agent/td-agent.conf',
       'echo "" >> /etc/td-agent/td-agent.conf',
       'echo "  <buffer>" >> /etc/td-agent/td-agent.conf',
       'echo "    flush_interval 1" >> /etc/td-agent/td-agent.conf',
