@@ -18,21 +18,17 @@ This sample is provided for demonstration purposes only, to serve as a starting 
 
 ## Getting Started
 
-### Pre-Requisites
+In order to get started, you will need an AWS account, preferably free from any production workloads. Ensure AWS Security Hub is enabled in the AWS Region where you plan to deploy the solution. To eliminate the need to setup IAM permissions and install pre-requisites, we recommend using [AWS Cloud9](https://aws.amazon.com/cloud9/).
 
-In order to get started, you will need an AWS account, preferably free from any production workloads. Also, either an IAM role to deploy with from Cloud9 or an IAM user with admin permissions as the stacks we will be deploying require sufficient privileges.
-Once we have that in place, it’s time to get ready to deploy.
+AWS Cloud9 is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. Cloud9 comes pre-configured with all the pre-requisites required for this project, such as git, npm, and AWS Cloud Development Kit (CDK).
 
-### Cloud9
-[AWS Cloud9](https://aws.amazon.com/cloud9/) is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. Cloud9 comes pre-configured with many of the dependencies we require for this blog post, such as git, npm, and AWS CDK.
-
-Create a Cloud9 environment from the AWS console. Provide the required Name, and leave the remaining default values. Once your Cloud9 environment has been created, you should have access to a terminal window.
+To get started, create a Cloud9 environment from the AWS console. Provide the required Name, and accept the remaining default values. Once your Cloud9 environment has been created, you can open the IDE and access a terminal window.
 
 ### Build and Deploy
 
 From a terminal window, you will need to clone the GitHub repo, install packages, build, and deploy the CloudFormation templates. Issue the following commands in a terminal window in Cloud9. By default, the AWS CDK will prompt you to deploy changes. If you want to skip confirmations, add the following command line option to the AWS CDK commands below.
  
- <code> --require-approval never</code>
+<code> --require-approval never</code>
 
 #### Clone GitHub repo
 <pre><code>
@@ -70,6 +66,14 @@ cdk deploy
 ## Verification
 
 Once the CDK deployment process has completed, you can [open AWS Security Hub Console Findings page](https://console.aws.amazon.com/securityhub/home/findings/findings/findings?search=Title%3D%255Coperator%255C%253APREFIX%255C%253ADRAGOS#/findings?search=Title%3D%255Coperator%255C%253APREFIX%255C%253ADRAGOS) to search for Findings with a Title that starts with <code>DRAGOS</code>. If successful, you should find a Finding with the Title <code>DRAGOS: Test Message from Dragos App</code>.
+
+## Cleanup
+
+To cleanup, you can simply issue the following command from your Cloud9 terminal window.
+
+<pre><code>
+cdk destroy
+</code></pre>
 
 ## License Summary
 
